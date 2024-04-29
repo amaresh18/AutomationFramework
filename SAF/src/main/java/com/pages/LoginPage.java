@@ -11,23 +11,18 @@ import com.utils.ReadPropertyFile;
 
 import com.utils.TestUtils;
 
-public class LoginPage extends BasePage{
-	
-	@FindBy(name="username")
-	WebElement txtbox_username;
-	
-	@FindBy(name="password")
-	WebElement txtbox_password;
-	
-	@FindBy(xpath="//*[text()='LOGIN']")
-	WebElement btn_login;
+public class LoginPage extends BasePage {
 
-	
-	
-	public  HomePage login() {
-		sendkeys(txtbox_username,TestUtils.getCellContent("TestData", ListenerClass.getTestcaseName(), "username"));
-		sendkeys(txtbox_password,TestUtils.getCellContent("TestData", ListenerClass.getTestcaseName(), "password"));
-		click(btn_login);
-		return new HomePage();
-	}
+    @FindBy(name = "identifier")
+    WebElement txtbox_email;
+
+    @FindBy(xpath = "//span[text()='Next']")
+    WebElement btn_next;
+
+
+    public void login(String username) {
+        //sendkeys(txtbox_email, TestUtils.getCellContent("TestData", ListenerClass.getTestcaseName(), "username"));
+        sendkeys(txtbox_email,username);
+        click(btn_next);
+    }
 }

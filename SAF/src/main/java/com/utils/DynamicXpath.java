@@ -8,10 +8,10 @@ import org.openqa.selenium.By;
  */
 public class DynamicXpath {
 
-	public static String get(String xpath, String data) {
-		
-		String rawxpath = xpath.replaceAll("%replaceable%", data);
-		return rawxpath;
-		
-	}
+    public static String get(String xpath, String data) {
+
+        String rawxpath = xpath.replaceAll("%replaceable%", data);
+        return rawxpath;
+
+    }
 }

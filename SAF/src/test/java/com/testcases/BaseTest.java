@@ -17,38 +17,40 @@ import com.utils.TestUtils;
 
 public class BaseTest {
 
-	@BeforeMethod
-	public void setUp() {
-		try {
-			Driver.initialize();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    @BeforeMethod
+    public void setUp() {
+        try {
+            Driver.initialize();
 
-	@AfterMethod
-	public void wrapUp() {
-		DriverManager.getDriver().close();
-	}
 
-	@BeforeSuite
-	public void beforeSuite() throws Exception {
-		ExtentReport.initialize();
-		if(ReadPropertyFile.get("RunMode").equalsIgnoreCase("Remote"))
-			RemoteConfiguration.setUpRemote();
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	@AfterSuite
-	public void afterSuite() throws Exception {
+    @AfterMethod
+    public void wrapUp() {
+        DriverManager.getDriver().close();
+    }
 
-		ExtentReport.report.flush();
-		TestUtils.sendEmailWithResults();
-		if(ReadPropertyFile.get("RunMode").equalsIgnoreCase("Remote")) {
-			RemoteConfiguration.shutDownRemote();
-		}
-		
-		File htmlFile = new File(ExtentReport.extentreportpath);
-		Desktop.getDesktop().browse(htmlFile.toURI());
-	}
+    @BeforeSuite
+    public void beforeSuite() throws Exception {
+        ExtentReport.initialize();
+        if (ReadPropertyFile.get("RunMode").equalsIgnoreCase("Remote"))
+            RemoteConfiguration.setUpRemote();
+    }
+
+    @AfterSuite
+    public void afterSuite() throws Exception {
+
+        //ExtentReport.report.flush();
+        TestUtils.sendEmailWithResults();
+        if (ReadPropertyFile.get("RunMode").equalsIgnoreCase("Remote")) {
+            RemoteConfiguration.shutDownRemote();
+        }
+
+        File htmlFile = new File(ExtentReport.extentreportpath);
+        Desktop.getDesktop().browse(htmlFile.toURI());
+    }
 
 }
